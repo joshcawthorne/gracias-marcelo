@@ -9,9 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.30.7",
+    "axios": "^0.26.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-styled-components": "^2.0.6",
+    "framer-motion": "^6.2.8",
+    "js-cookie": "^3.0.1",
     "next": "12.1.0",
+    "next-images": "^1.8.4",
+    "next-seo": "^5.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-google-recaptcha-v3": "^1.9.7",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-loading-icons": "^1.0.8",
+    "react-recaptcha-x": "^1.1.13",
+    "react-svg-loader": "^3.0.3",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "eslint": "8.10.0",
