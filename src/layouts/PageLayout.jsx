@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Script from "next/script";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
 
@@ -20,6 +20,19 @@ const ContentContainer = styled.div`
 function PageLayout({ children, setRemoveZIndex, removeZIndex }) {
   return (
     <PageContainer>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-HGVBEPRWDB"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+         
+           gtag('config', 'G-HGVBEPRWDB');
+        `}
+      </Script>
       <Header removeZIndex={removeZIndex} />
       <ContentContainer setRemoveZIndex={setRemoveZIndex}>
         {children}

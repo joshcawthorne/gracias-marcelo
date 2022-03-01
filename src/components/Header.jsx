@@ -6,6 +6,7 @@ import Logo from "src/assets/svg/lustLogo.svg";
 import Button from "./Button";
 import mq from "src/utils/mq";
 import MobileMenu from "src/components/MobileMenu";
+import SubmitMessage from "src/components/SubmitMessage";
 
 import Plus from "src/assets/svg/plus.svg";
 import RandomIcon from "src/assets/svg/randomIcon.svg";
@@ -72,13 +73,31 @@ const MenuIconContainer = styled.div`
 function Header({ removeZIndex }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState(false);
   function handleViewRandom() {
     setMenuOpen(false);
     router.push("/random");
   }
+
+  function handleSubmit() {
+    setSubmitMessage(true);
+  }
+
   return (
     <>
-      {menuOpen && <MobileMenu setMenuOpen={setMenuOpen} />}
+      {menuOpen && (
+        <MobileMenu
+          setMenuOpen={setMenuOpen}
+          menuOpen={menuOpen}
+          setSubmitMessage={setSubmitMessage}
+        />
+      )}
+      {submitMessage && (
+        <SubmitMessage
+          submitMessage={submitMessage}
+          setSubmitMessage={setSubmitMessage}
+        />
+      )}
 
       <HeaderContainerOuter removeZIndex={removeZIndex}>
         <HeaderContainer>
@@ -95,7 +114,12 @@ function Header({ removeZIndex }) {
                 action={handleViewRandom}
                 Icon={RandomIcon}
               />
-              <Button text={"Submit your message"} useIcon Icon={Plus} />
+              <Button
+                text={"Submit your message"}
+                useIcon
+                Icon={Plus}
+                action={handleSubmit}
+              />
             </ButtonContainer>
             <MenuIconContainer onClick={() => setMenuOpen(true)}>
               <MenuIcon />

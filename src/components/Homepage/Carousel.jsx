@@ -12,12 +12,11 @@ import {
 } from "@react-hook/window-size";
 
 const ContentContainer = styled(motion.div)`
-  overflow-y: visible;
   user-select: none;
   cursor: grab;
   .swiper {
     width: 100vw;
-    overflow-y: visible;
+
     padding: 20px 0;
   }
 `;
@@ -27,7 +26,7 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   padding-top: 30px;
   z-index: 5;
-  overflow-y: visible;
+
   .swiper-wrapper {
     overflow-y: visible;
     -webkit-transition-timing-function: linear !important;
@@ -87,7 +86,7 @@ const SliderAnim = {
     opacity: 1,
     transition: {
       when: "beforeChildren",
-      delayChildren: 1,
+      delayChildren: 0.5,
       staggerChildren: 0.05,
     },
   },

@@ -15,6 +15,12 @@ const LoadingContainer = styled.div`
 
 const SearchResultsContainer = styled.div``;
 
+const NoResultsContainer = styled.div`
+  margin: 100px 0;
+  color: #fff;
+  font-weight: bold;
+`;
+
 function Search({ searchTerm, setRemoveZIndex }) {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
@@ -51,18 +57,26 @@ function Search({ searchTerm, setRemoveZIndex }) {
           <Loader />
         </LoadingContainer>
       ) : (
-        <SearchResultsContainer>
-          {results.map((result, i) => (
-            <SubmissionObject
-              key={i}
-              id={result.id}
-              submitter={result.submitter}
-              messageContent={result.message_content}
-              flagged={result.flagged}
-              setRemoveZIndex={setRemoveZIndex}
-            />
-          ))}
-        </SearchResultsContainer>
+        <>
+          {results.length === 0 ? (
+            <NoResultsContainer>
+              Please don't panic, but no results were found.
+            </NoResultsContainer>
+          ) : (
+            <SearchResultsContainer>
+              {results.map((result, i) => (
+                <SubmissionObject
+                  key={i}
+                  id={result.id}
+                  submitter={result.submitter}
+                  messageContent={result.message_content}
+                  flagged={result.flagged}
+                  setRemoveZIndex={setRemoveZIndex}
+                />
+              ))}
+            </SearchResultsContainer>
+          )}
+        </>
       )}
     </SearchContainer>
   );

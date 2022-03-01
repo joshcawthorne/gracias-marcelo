@@ -1,11 +1,12 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
 import Button from "src/components/Button";
 import BackButton from "src/components/BackButton";
 import flagMessage from "src/services/flagMessage";
 import NewlineText from "src/utils/newlineText";
+import mq from "src/utils/mq";
 
 import Logo from "src/assets/svg/lustLogo.svg";
 import ErrorIcon from "src/assets/svg/error.svg";
@@ -32,13 +33,15 @@ const FlagMessageContainer = styled(motion.div)`
   width: 600px;
   max-width: 100%;
   position: relative;
-  min-height: 100vh;
   overflow-y: auto;
   margin-top: 0px;
   max-height: 100vh;
   z-index: 10000;
   overflow: auto;
   max-height: 100vh;
+  ${mq.mobile(css`
+    min-height: 100vh;
+  `)};
 `;
 
 const UpperLayer = styled(motion.div)`
@@ -268,7 +271,7 @@ function FlagMessage({ quote, id, setFlagMessage }) {
           <Desc>
             <p>
               {
-                "While we're working to filter out any inappropriate content, we're just a team of volunteers, and we had thousands of messages submitted."
+                "While we're working to filter out any inappropriate content, we're just a team of volunteers, and we've had thousands of messages submitted."
               }
             </p>
             <p>
@@ -302,6 +305,7 @@ function FlagMessage({ quote, id, setFlagMessage }) {
             action={handleFlag}
             loading={loading}
             disabled={loading}
+            styles={{ marginRight: "0" }}
           />
         </ButtonContainer>
       </FlagMessageContainer>

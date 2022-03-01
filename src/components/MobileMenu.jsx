@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -5,7 +6,7 @@ import { useRouter } from "next/router";
 import Logo from "src/assets/svg/lustLogo.svg";
 import Cross from "src/assets/svg/cross.svg";
 
-const MobileMenuOuterContainer = styled.div`
+const MobileMenuOuterContainer = styled(motion.div)`
   height: 100vh;
   width: 100vw;
   z-index: 200;
@@ -21,7 +22,7 @@ const MobileMenuOuterContainer = styled.div`
   align-items: center;
 `;
 
-const TopLayer = styled.div`
+const TopLayer = styled(motion.div)`
   padding: 20px;
   width: 100%;
   display: flex;
@@ -29,20 +30,22 @@ const TopLayer = styled.div`
   align-items: center;
 `;
 
-const ContentContainer = styled.div`
+const ContentContainer = styled(motion.div)`
   width: 100%;
   text-align: center;
 `;
 
-const BottomLayer = styled.div`
+const BottomLayer = styled(motion.div)`
   width: 100%;
 `;
 
 const LogoContainer = styled.div``;
 
-const CloseIconContainer = styled.div``;
+const CloseIconContainer = styled.div`
+  cursor: pointer;
+`;
 
-const Title = styled.div`
+const Title = styled(motion.div)`
   font-weight: bold;
   font-size: 38px;
   line-height: 45px;
@@ -53,7 +56,7 @@ const Title = styled.div`
   }
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled(motion.div)`
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -87,6 +90,9 @@ const Created = styled.div`
   }
   span {
     margin-left: 2.5px;
+    @media (max-width: 525px) {
+      display: none;
+    }
   }
 `;
 
@@ -98,46 +104,144 @@ const CopyrightText = styled.div`
   line-height: 14px;
 `;
 
-function MobileMenu({ setMenuOpen }) {
+function MobileMenu({ setMenuOpen, setSubmitMessage, menuOpen }) {
+  const [runAnim, setRunAnim] = useState(false);
   const router = useRouter();
+
+  function handleClose() {
+    setRunAnim(false);
+    setTimeout(() => {
+      setMenuOpen(false);
+    }, 500);
+  }
+
   function handleViewAll() {
-    setMenuOpen(false);
+    handleClose();
     router.push("/");
   }
 
   function handleViewRandom() {
-    setMenuOpen(false);
+    handleClose();
     router.push("/random");
   }
 
   function handleJoinTrust() {
-    setMenuOpen(false);
+    handleClose();
     router.push("https://lufctrust.com/membership");
   }
 
+  function handleSubmit() {
+    handleClose();
+    setSubmitMessage(true);
+  }
+
+  useEffect(() => {
+    if (menuOpen) {
+      setRunAnim(true);
+    } else {
+      setRunAnim(false);
+    }
+  }, [menuOpen]);
+
+  const BackgroundAnim = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { delay: 0, duration: 0.5 },
+    },
+  };
+
+  const TopLayerAnim = {
+    hidden: { opacity: 0, y: -40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.3, duration: 0.5 },
+    },
+  };
+
+  const ContentAnim = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        delayChildren: 0.5,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const ItemAnim = {
+    hidden: { opacity: 0, y: 80 },
+    show: {
+      opacity: [0, 0.5, 1],
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        type: "spring",
+        velocity: 100,
+        stiffness: 700,
+        damping: 100,
+      },
+    },
+  };
+
+  const BottomAnim = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 1, duration: 0.5 },
+    },
+  };
+
   return (
-    <MobileMenuOuterContainer>
-      <TopLayer>
+    <MobileMenuOuterContainer
+      initial="hidden"
+      animate={runAnim ? "show" : "hidden"}
+      variants={BackgroundAnim}
+    >
+      <TopLayer
+        initial="hidden"
+        animate={runAnim ? "show" : "hidden"}
+        variants={TopLayerAnim}
+      >
         <LogoContainer onClick={() => handleViewAll()}>
           <Logo width={"50px"} />
         </LogoContainer>
-        <CloseIconContainer onClick={() => setMenuOpen(false)}>
+        <CloseIconContainer onClick={() => handleClose()}>
           <Cross width={"30px"} />
         </CloseIconContainer>
       </TopLayer>
-      <ContentContainer>
-        <Title>
+      <ContentContainer
+        initial="hidden"
+        animate={runAnim ? "show" : "hidden"}
+        variants={ContentAnim}
+      >
+        <Title key={0} variants={ItemAnim}>
           <span>Gracias, </span>Marcelo
         </Title>
-        <MenuItem onClick={() => handleViewRandom()}>
+        <MenuItem
+          onClick={() => handleViewRandom()}
+          key={1}
+          variants={ItemAnim}
+        >
           View a random Message
         </MenuItem>
-        <MenuItem onClick={() => handleViewRandom()}>
+        <MenuItem onClick={() => handleSubmit()} key={2} variants={ItemAnim}>
           Submit your message
         </MenuItem>
-        <MenuItem onClick={() => handleJoinTrust()}>Join The Trust</MenuItem>
+        <MenuItem onClick={() => handleJoinTrust()} key={3} variants={ItemAnim}>
+          Join The Trust
+        </MenuItem>
       </ContentContainer>
-      <BottomLayer>
+      <BottomLayer
+        initial="hidden"
+        animate={runAnim ? "show" : "hidden"}
+        variants={BottomAnim}
+      >
         <FooterContainerInner>
           <CopyrightText>
             © 2022 - Present, Leeds United Supporters' Trust

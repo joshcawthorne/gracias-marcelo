@@ -55,6 +55,9 @@ const GlobalStyle = createGlobalStyle`
 
 const GraciasMarcelo = ({ Component: Component, pageProps }) => {
   const [removeZIndex, setRemoveZIndex] = useState(false);
+  if (process.browser) {
+    document.body.classList.add("loaded");
+  }
   return (
     <PageLayout removeZIndex={removeZIndex} setRemoveZIndex={setRemoveZIndex}>
       <GlobalStyle />

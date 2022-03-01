@@ -20,7 +20,19 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
+          {
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
 
+html {background: #333}
+body #__next div {visibility: hidden}
+body.loaded #__next div {visibility: visible}
+
+`,
+              }}
+            ></style>
+          }
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"

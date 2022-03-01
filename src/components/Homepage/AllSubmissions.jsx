@@ -221,7 +221,7 @@ const ContainerAnim = {
     y: 0,
     transition: {
       duration: 0.6,
-      delay: 2.3,
+      delay: 3,
       ease: "easeOut",
       type: "spring",
       velocity: 100,

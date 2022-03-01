@@ -107,7 +107,7 @@ const Message = styled.div`
   color: #fff;
   position: relative;
   padding-left: 35px;
-  margin-left: 13px;
+  margin-left: 18px;
   padding-right: 30px;
   padding-top: 10px;
   padding-bottom: 0px;
