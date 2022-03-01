@@ -1,0 +1,8 @@
+<svg height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M10 17.5C4.58802 17.5 2.46393 17.1156 2.11965 15.1694C1.77537 13.2233 3.97823 9.56452 4.65705 8.35706C6.92718 4.32007 8.46981 2.5 10 2.5C11.5303 2.5 13.0729 4.32007 15.343 8.35706C16.0219 9.56452 18.2247 13.2233 17.8804 15.1694C17.537 17.1156 15.4121 17.5 10 17.5Z"
+        stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M10 7.08331V10.3291" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.99641 13.2458H10.0039" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

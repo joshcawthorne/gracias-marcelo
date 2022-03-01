@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 import { TailSpin } from "react-loading-icons";
 import { motion } from "framer-motion";
+
+import mq from "src/utils/mq";
 
 const ContentContainer = styled.div`
   width: 100%;
@@ -27,30 +29,58 @@ const ButtonItem = styled.button`
   line-height: 14px;
   letter-spacing: 0.4px;
   -webkit-app-region: no-drag;
-  padding: 25px;
+  padding: 10px;
   border-radius: 5px;
-  min-width: ${(props) => (props.minWidth ? props.minWidth : "auto")};
+  min-width: ${(props) => (props.minWidth ? props.minWidth : "0")};
   height: 40px;
   font-weight: 500;
-  background: #1c2128;
+  background: transparent;
   color: #fff;
   border: 0px;
   z-index: 50;
   border-radius: 4px;
-  box-sizing: border-box;
+
   position: relative;
-  font-weight: 800;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin-right: 15px;
+  :hover {
+    background-color: #2d3747;
+    color: #fff;
+    border-color: #fff;
+
+    transition: 400ms;
+  }
+
+  ${mq.mobile(css`
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 12px;
+    margin-right: 10px;
+    padding: 7.5px;
+  `)};
+
+  ${(props) =>
+    props.warning &&
+    css`
+      border-color: #ff2c3c;
+      :hover {
+        background-color: #ff2c3c;
+        color: #fff;
+        border-color: #ff2c3c;
+      }
+    `}
+
   ${(props) =>
     props.leftSpacing &&
     css`
       margin-left: 15px;
     `}
-  :hover {
-    background-color: #0f3c58;
-
-    transition: 400ms;
-  }
+  
   ${(props) =>
     props.primaryAction &&
     css`
@@ -59,18 +89,6 @@ const ButtonItem = styled.button`
       :hover {
         background-color: ${(props) => props.theme.primaryAction20};
         border: 2px solid ${(props) => props.theme.primaryAction20};
-      }
-    `}
-
-  ${(props) =>
-    !props.disableAnimation &&
-    css`
-      :hover {
-        /*transform: translate3d(-2px, -2px, 0);
-        transition: 400ms;
-        box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-          rgba(17, 17, 26, 0.1) 0px 16px 56px,
-          rgba(17, 17, 26, 0.1) 0px 24px 80px;*/
       }
     `}
 
@@ -108,12 +126,6 @@ const ButtonItem = styled.button`
         box-shadow: unset;
       }
     `}
-  ${(props) =>
-    props.skipButton &&
-    css`
-      width: 155px;
-      background-color: #636bfd;
-    `}
 `;
 
 const LoadingContainer = styled(motion.div)`
@@ -127,7 +139,10 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 10px;
+  ${mq.mobile(css`
+    margin-right: 7.5px;
+  `)};
 `;
 
 const ArrowContainer = styled.div`
@@ -175,8 +190,10 @@ const Button = ({
   leftSpacing,
   useIcon,
   Icon,
+  warning,
 }) => {
   const themeContext = useContext(ThemeContext);
+  const [hover, setHover] = useState(false);
   return (
     <ButtonItem
       onClick={() => action && !disabled && action()}
@@ -187,13 +204,20 @@ const Button = ({
       ghost={ghost}
       disableAnimation={disableAnimation}
       primaryAction={primaryAction}
-      minWidth={minWidth ? minWidth : "140px"}
+      minWidth={minWidth ? minWidth : "0"}
       leftSpacing={leftSpacing}
+      warning={warning}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <ContentContainer>
         {useIcon && (
           <IconContainer>
-            <Icon stroke={"#fff"} fill={!fill ? "transparent" : "#fff"} />
+            <Icon
+              stroke={"#fff"}
+              fill={!fill ? "transparent" : "#fff"}
+              width={"20px"}
+            />
           </IconContainer>
         )}
         {!noText && text}

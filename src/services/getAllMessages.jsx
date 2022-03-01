@@ -1,8 +1,8 @@
 import { supabase } from "src/utils/supabaseClient";
 
-async function getAllMessages({ startPosition }) {
+async function getAllMessages({ startPosition, ascending }) {
   console.log(startPosition);
-  let endPosition = startPosition + 50;
+  let endPosition = startPosition + 10;
   console.log(parseInt(endPosition));
   try {
     console.log("Starting");
@@ -10,7 +10,7 @@ async function getAllMessages({ startPosition }) {
       .from("messages")
       .select("*")
       .range(startPosition, endPosition)
-      .order("id", { ascending: true });
+      .order("id", { ascending: ascending });
 
     console.log("Ending");
     if (data) {

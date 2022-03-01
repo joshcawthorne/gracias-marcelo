@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 import PageLayout from "src/layouts/PageLayout";
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -51,10 +54,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const GraciasMarcelo = ({ Component: Component, pageProps }) => {
+  const [removeZIndex, setRemoveZIndex] = useState(false);
   return (
-    <PageLayout>
+    <PageLayout removeZIndex={removeZIndex} setRemoveZIndex={setRemoveZIndex}>
       <GlobalStyle />
-      <Component {...pageProps}></Component>
+      <Component {...pageProps} setRemoveZIndex={setRemoveZIndex}></Component>
     </PageLayout>
   );
 };

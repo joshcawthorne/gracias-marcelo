@@ -1,0 +1,22 @@
+import { supabase } from "src/utils/supabaseClient";
+
+async function getSearchResults(searchTerm) {
+  console.log(searchTerm);
+  try {
+    const { data, error } = await supabase
+      .from("messages")
+      .select()
+      .textSearch("submitter", searchTerm);
+
+    if (error) {
+      return { error: true, errorMessage: error.message, data: null };
+    }
+    if (data) {
+      return { error: false, errorMessage: null, data: data };
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+export default getSearchResults;

@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const FooterContainer = styled.div`
+import mq from "src/utils/mq";
+
+const FooterContainerOuter = styled.div`
   height: 70px;
   width: 100%;
   display: flex;
@@ -13,21 +15,30 @@ const FooterContainer = styled.div`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 10;
+  ${mq.mobile(css`
+    display: none;
+  `)};
 `;
 
-const FooterContainerInner = styled.div`
+const FooterContainer = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1400px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 0px 40px;
   box-sizing: border-box;
 `;
 
+const FooterContainerInner = styled.div`
+  display: block;
+  text-align: center;
+`;
+
 const Created = styled.div`
   color: #b8b6bc;
+  display: inline-block;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
@@ -42,6 +53,7 @@ const Created = styled.div`
 
 const CopyrightText = styled.div`
   color: #b8b6bc;
+  display: inline-block;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
@@ -49,23 +61,25 @@ const CopyrightText = styled.div`
 
 function Footer() {
   return (
-    <FooterContainer>
-      <FooterContainerInner>
-        <CopyrightText>
-          © 2022 - Present, Leeds United Supporters' Trust
-        </CopyrightText>
-        <Created>
-          <span> | </span> Designed and Built by{" "}
-          <a
-            href="https://www.joshcawthorne.com"
-            target={"_blank"}
-            rel="noreferrer"
-          >
-            Josh Cawthorne
-          </a>
-        </Created>
-      </FooterContainerInner>
-    </FooterContainer>
+    <FooterContainerOuter>
+      <FooterContainer>
+        <FooterContainerInner>
+          <CopyrightText>
+            © 2022 - Present, Leeds United Supporters' Trust
+          </CopyrightText>
+          <Created>
+            <span> | </span> Designed and Built by{" "}
+            <a
+              href="https://www.joshcawthorne.com"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              Josh Cawthorne
+            </a>
+          </Created>
+        </FooterContainerInner>
+      </FooterContainer>
+    </FooterContainerOuter>
   );
 }
 

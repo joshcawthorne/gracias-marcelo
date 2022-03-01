@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Button from "src/components/Button";
 import BackButton from "src/components/BackButton";
 import flagMessage from "src/services/flagMessage";
+import NewlineText from "src/utils/newlineText";
 
 import Logo from "src/assets/svg/lustLogo.svg";
 import ErrorIcon from "src/assets/svg/error.svg";
@@ -15,7 +16,7 @@ const FlagMessageOuterContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 200;
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +30,13 @@ const FlagMessageContainer = styled(motion.div)`
   background-color: #0a0514;
   border-radius: 10px;
   width: 600px;
+  max-width: 100%;
   position: relative;
+  min-height: fit-content;
+  overflow-y: auto;
+  margin-top: 0px;
+  max-height: calc(100vh);
+  z-index: 10000;
 `;
 
 const UpperLayer = styled(motion.div)`
@@ -132,6 +139,9 @@ const ModalMessageContainer = styled.div`
   letter-spacing: 0.1px;
   font-weight: 600;
   font-family: "Public Sans", sans-serif;
+  p {
+    margin-bottom: 15px;
+  }
 `;
 
 const ContainerAnim = {
@@ -149,7 +159,7 @@ const ButtonAnim = {
     y: 0,
     transition: {
       duation: 0.1,
-      delay: 0.9,
+      delay: 0.7,
       ease: "easeOut",
       type: "spring",
       velocity: 200,
@@ -183,7 +193,7 @@ const ContentLayerAnim = {
     y: 0,
     transition: {
       duation: 0.1,
-      delay: 0.7,
+      delay: 0.6,
       ease: "easeOut",
       type: "spring",
       velocity: 200,
@@ -271,7 +281,7 @@ function FlagMessage({ quote, id, setFlagMessage }) {
           animate={runAnimation ? "show" : "hidden"}
           variants={ContentLayerAnim}
         >
-          {quote}
+          <NewlineText text={quote} />
         </MessageContainer>
 
         <ButtonContainer
@@ -284,15 +294,12 @@ function FlagMessage({ quote, id, setFlagMessage }) {
             action={backAction}
             loading={false}
             disabled={false}
-            skipButton={false}
           />
           <Button
             text={"Flag Inappropriate"}
             action={handleFlag}
             loading={loading}
             disabled={loading}
-            skipButton={false}
-            leftSpacing
           />
         </ButtonContainer>
       </FlagMessageContainer>

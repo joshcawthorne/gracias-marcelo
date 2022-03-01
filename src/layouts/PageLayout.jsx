@@ -17,11 +17,13 @@ const ContentContainer = styled.div`
   align-items: center;
 `;
 
-function PageLayout({ children }) {
+function PageLayout({ children, setRemoveZIndex, removeZIndex }) {
   return (
     <PageContainer>
-      <Header />
-      <ContentContainer>{children}</ContentContainer>
+      <Header removeZIndex={removeZIndex} />
+      <ContentContainer setRemoveZIndex={setRemoveZIndex}>
+        {children}
+      </ContentContainer>
       <Footer />
     </PageContainer>
   );
