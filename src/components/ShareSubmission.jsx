@@ -411,7 +411,7 @@ function ShareSubmission({ quote, id, setShareSubmission, submitter }) {
       router.asPath;
     setwhatsAppShareText(whatsAppShare);
 
-    let url = "https://gracias-bielsa.lufctrust.com/s/" + id;
+    let url = "https://gracias-marcelo.lufctrust.com/s/" + id;
     let linkedInTitle = "Here's an interactive map of all the LUFC Murals.";
     let linkedInText = "Here's an interactive map of all the LUFC Murals.";
     setShareUrl(url);
@@ -425,7 +425,7 @@ function ShareSubmission({ quote, id, setShareSubmission, submitter }) {
   }, []);
 
   function copyToClipboard() {
-    copy("https://gracias-bielsa.lufctrust.com/s/" + id);
+    copy("https://gracias-marcelo.lufctrust.com/s/" + id);
     setcopyLinkButtonText("Copied!");
     setCopied(true);
     setTimeout(() => {
@@ -531,7 +531,7 @@ function ShareSubmission({ quote, id, setShareSubmission, submitter }) {
             <DomainCopyItem>
               <DomainInput
                 type={"text"}
-                value={"https://gracias-bielsa.lufctrust.com/s/" + id}
+                value={"https://gracias-marcelo.lufctrust.com/s/" + id}
                 onClick={(e) => e.target.select()}
               />
               <DomainCopyButton onClick={() => copyToClipboard()}>
