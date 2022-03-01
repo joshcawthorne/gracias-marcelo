@@ -178,14 +178,14 @@ function Carousel() {
             <SwiperSlide
               key={i}
               style={{
-                height: width > 767 ? "300px" : "200px",
+                height: width > 767 ? "300px" : "160px",
                 maxWidth: "600px",
                 overflowY: "visible",
               }}
             >
               <AnimLayer key={i} variants={ItemAnim}>
                 <CarouselObject key={i}>
-                  <NewlineText text={truncate(item.message_content, 280)} />
+                  <NewlineText text={truncate(item.message_content, 240)} />
                 </CarouselObject>
               </AnimLayer>
             </SwiperSlide>
