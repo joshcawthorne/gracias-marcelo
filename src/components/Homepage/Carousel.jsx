@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import getRandomMessages from "src/services/getRandomMessages";
 import styled, { css } from "styled-components";
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import mq from "src/utils/mq";
 import {
@@ -13,6 +13,8 @@ import {
 
 const ContentContainer = styled(motion.div)`
   overflow-y: visible;
+  user-select: none;
+  cursor: grab;
   .swiper {
     width: 100vw;
     overflow-y: visible;
@@ -108,7 +110,7 @@ const ItemAnim = {
 };
 
 function Carousel() {
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation, FreeMode]);
   const swiperRef = useRef(null);
   const [carouselData, setCarouselData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -161,15 +163,16 @@ function Carousel() {
           slidesPerView={"auto"}
           spaceBetween={15}
           autoplay={{
-            delay: 0,
+            delay: 1000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
           allowTouchMove={true}
           speed={40000}
-          resistance={false}
           loop={true}
           freeMode={true}
+          resistanceRatio={1}
+          resistance
           freeModeMomentum={true}
         >
           {carouselData.map((item, i) => (
