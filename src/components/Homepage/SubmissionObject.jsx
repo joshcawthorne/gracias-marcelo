@@ -236,7 +236,7 @@ function SubmissionObject({
         <MessageContentContainer
           animate={open ? { height: "fit-content" } : { height: "0px" }}
         >
-          <MessageContentContainerInner onClick={() => setOpen(!open)}>
+          <MessageContentContainerInner>
             <Message>
               <NewlineText text={messageContent} />
             </Message>

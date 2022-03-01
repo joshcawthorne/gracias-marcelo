@@ -51,7 +51,9 @@ const QuoteMessage = styled(motion.div)`
   letter-spacing: 0.01em;
   padding-top: 20px;
   padding-bottom: 15px;
-
+  ${mq.mobile(css`
+    max-height: unset;
+  `)};
   :before {
     content: "";
     width: 4px;

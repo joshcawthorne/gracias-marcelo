@@ -61,6 +61,7 @@ const CarouselObject = styled.div`
   align-items: flex-start;
   flex-direction: column;
   text-align: left;
+  user-select: none;
   p {
     margin-bottom: 10px;
   }
@@ -149,7 +150,12 @@ function Carousel() {
 
   return (
     <ContentContainer>
-      <motion.div variants={SliderAnim} initial="hidden" animate="show">
+      <motion.div
+        style={{ touchEvents: "none" }}
+        variants={SliderAnim}
+        initial="hidden"
+        animate="show"
+      >
         <StyledSwiper
           ref={swiperRef}
           slidesPerView={"auto"}
@@ -159,7 +165,7 @@ function Carousel() {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
-          allowTouchMove={false}
+          allowTouchMove={true}
           speed={40000}
           resistance={false}
           loop={true}

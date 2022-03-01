@@ -32,11 +32,13 @@ const FlagMessageContainer = styled(motion.div)`
   width: 600px;
   max-width: 100%;
   position: relative;
-  min-height: fit-content;
+
   overflow-y: auto;
   margin-top: 0px;
-  max-height: calc(100vh);
+  max-height: 100vh;
   z-index: 10000;
+  overflow: auto;
+  max-height: 100vh;
 `;
 
 const UpperLayer = styled(motion.div)`
