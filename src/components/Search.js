@@ -36,14 +36,12 @@ function Search({ searchTerm, setRemoveZIndex }) {
 
   async function requestSearchResults() {
     setLoading(true);
-    console.log("RUNNING", searchTerm);
     const { data, error, errorMessage } = await getSearchResults(
       searchTerm.replaceAll(" ", "&")
     );
     if (error) {
-      console.log(errorMessage);
+      console.warn(errorMessage);
     } else {
-      console.log(data);
       setResults(data);
       setLoading(false);
     }

@@ -2,7 +2,6 @@ import { supabase } from "src/utils/supabaseClient";
 
 async function getRandomMessage({ id }) {
   try {
-    console.log(id);
     const { data, error } = await supabase
       .from("messages")
       .select()
@@ -11,7 +10,6 @@ async function getRandomMessage({ id }) {
       return { error: true, errorMessage: error.message, data: null };
     }
     if (data) {
-      console.log(data);
       if (data.length > 0) {
         if (data[0].flagged === false) {
           return { error: false, errorMessage: null, data: data };

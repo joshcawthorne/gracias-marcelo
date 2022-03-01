@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 import Button from "src/components/Button";
 import FlagMessage from "src/components/FlagMessage";
@@ -239,8 +241,7 @@ function MessageView({ setRemoveZIndex }) {
 
   async function loadMessageData() {
     const { data, error, errorMessage } = await getMessageData({ id: id });
-    console.log(error);
-    console.log(errorMessage);
+    console.warn(errorMessage);
     if (error) {
       if (errorMessage === "flagged") {
         setError(true);
@@ -254,7 +255,6 @@ function MessageView({ setRemoveZIndex }) {
     } else {
       setMessageData(data[0]);
       setSubmitterNamePretty(toTitleCase(data[0].submitter));
-      console.log("DATA", data[0]);
       setLoading(false);
     }
   }
@@ -296,6 +296,14 @@ function MessageView({ setRemoveZIndex }) {
 
   return (
     <Container>
+      <Head>
+        <title>Gracias, Marcelo</title>
+      </Head>
+      <NextSeo
+        title={`${
+          submitterNamePretty.split(" ")[0]
+        }'s Message | Gracias, Marcelo `}
+      />
       <QuoteContainerOuter>
         {flagMessage && (
           <FlagMessage

@@ -419,13 +419,10 @@ function FlagMessage({ quote, setSubmitMessage, submitMessage }) {
         message_content: messageInput,
       };
 
-      console.log(messageData);
-
       let { error, data } = await supabase.from("messages").insert(messageData);
 
       if (error) {
-        console.log(error);
-        console.log(error.message);
+        console.warn(error.message);
         if (
           error.message === errorKeys.DUPLICATE_EMAIL ||
           error.message ===
@@ -447,7 +444,6 @@ function FlagMessage({ quote, setSubmitMessage, submitMessage }) {
         }
       } else if (data) {
         setTimeout(() => {
-          console.log(data);
           Cookies.set("submitted", true, { expires: 1000 });
           Cookies.set("submitId", data[0].id, { expires: 1000 });
           setId(data[0].id);
@@ -481,7 +477,7 @@ function FlagMessage({ quote, setSubmitMessage, submitMessage }) {
     if (typeof token === "string") {
       setNotRobot(true);
     } else {
-      console.log("token retrieval in progress...");
+      console.warn("token retrieval in progress...");
     }
   };
 

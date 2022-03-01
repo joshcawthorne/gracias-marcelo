@@ -1,7 +1,6 @@
 import { supabase } from "src/utils/supabaseClient";
 
 async function getSearchResults(searchTerm) {
-  console.log(searchTerm);
   try {
     const { data, error } = await supabase
       .from("messages")

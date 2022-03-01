@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { motion } from "framer-motion";
 
-import getAllMessages from "src/services/getAllMessages";
-import getTotalMessageLength from "src/services/getTotalMessageLength";
 import { useRouter } from "next/router";
 import Container from "../Container";
-import SubmissionObject from "./SubmissionObject";
-import Loader from "../Loader";
+
 import mq from "src/utils/mq";
 import Search from "src/components/Search";
+import AllSubmissionListAsc from "./AllSubmissionListAsc";
+import AllSubmissionListDesc from "./AllSubmissionListDesc";
 
 import SortIcon from "src/assets/svg/sort.svg";
 import SearchIcon from "src/assets/svg/search.svg";
@@ -41,17 +39,6 @@ const FullMessage = styled.div`
 const MessagePoster = styled.div`
   font-weight: bold;
   color: #fde116;
-`;
-
-const StyledInfiniteScroll = styled(InfiniteScroll)`
-  width: 100%;
-`;
-
-const InnerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  width: 100%;
 `;
 
 const MessageContent = styled.div`
@@ -135,11 +122,6 @@ const Title = styled.div`
     font-size: 22px;
     line-height: 26px;
   `)};
-`;
-
-const LoaderContainer = styled.div`
-  margin-top: 50px;
-  margin-bottom: 100px;
 `;
 
 const SearchbarContainer = styled.div`
@@ -241,11 +223,8 @@ function AllSubmissions({ setRemoveZIndex }) {
   const [loadedTotalLength, setLoadedTotalLength] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [reset, setReset] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    loadTotalMessageLength();
-  }, []);
 
   useEffect(() => {
     if (searchInput !== "") {
@@ -255,60 +234,7 @@ function AllSubmissions({ setRemoveZIndex }) {
     }
   }, [searchInput]);
 
-  useEffect(() => {
-    setLoadPosition(-1);
-    if (firstLoad) {
-      setFirstLoad(false);
-    } else {
-      setMessageData([]);
-
-      setTimeout(() => {
-        loadMoreMessages(true);
-      }, 100);
-    }
-  }, [ascending]);
-
-  async function loadTotalMessageLength() {
-    console.log("Loading");
-    const totalMessageLength = await getTotalMessageLength();
-
-    setTotalLength(totalMessageLength.data);
-    setLoadedTotalLength(true);
-    loadMoreMessages();
-  }
-
-  async function loadMoreMessages(reset) {
-    console.log("Starting at", loadPosition);
-    const { data, endPosition, error, errorMessage } = await getAllMessages({
-      startPosition: reset ? 0 : parseInt(loadPosition) + 1,
-      ascending: ascending,
-    });
-    if (error) {
-      console.log(errorMessage);
-    }
-    if (data) {
-      setLoadPosition(parseInt(endPosition));
-      console.log(totalLength);
-      if (endPosition >= totalLength) {
-        setEndPosition(true);
-      }
-      setTimeout(() => {
-        setMessageData((messageData) => [...messageData, ...data]);
-      }, Math.floor(Math.random() * (2000 - 0 + 1)) - 1);
-    }
-  }
-
-  function handleClick(id) {
-    router.push(`/message/${id}`);
-  }
-
-  const LoaderObject = () => {
-    return (
-      <LoaderContainer>
-        <Loader />
-      </LoaderContainer>
-    );
-  };
+  useEffect(() => {}, [ascending]);
 
   return (
     <Container styles={{ display: "flex", justifyContent: "center" }}>
@@ -347,40 +273,21 @@ function AllSubmissions({ setRemoveZIndex }) {
               setRemoveZIndex={setRemoveZIndex}
             />
           ) : (
-            <StyledInfiniteScroll
-              dataLength={messageData.length}
-              next={loadMoreMessages}
-              hasMore={!endPosition}
-              loader={<LoaderObject />}
-              endMessage={
-                <p
-                  style={{ textAlign: "center", color: "#fff", margin: "50px" }}
-                >
-                  <b>{"You've reached the end of the road"}</b>
-                </p>
-              }
-              // below props only if you need pull down functionality
-            >
-              <InnerContainer>
-                {messageData.map((d, i) => {
-                  if (!d.flagged) {
-                    console.log(d);
-                    return (
-                      <SubmissionObject
-                        key={i}
-                        id={d.id}
-                        submitter={d.submitter}
-                        messageContent={d.message_content}
-                        flagged={d.flagged}
-                        setRemoveZIndex={setRemoveZIndex}
-                      />
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-              </InnerContainer>
-            </StyledInfiniteScroll>
+            <>
+              {ascending ? (
+                <AllSubmissionListAsc
+                  ascending={ascending}
+                  key={ascending}
+                  setRemoveZIndex={setRemoveZIndex}
+                />
+              ) : (
+                <AllSubmissionListDesc
+                  ascending={ascending}
+                  key={ascending}
+                  setRemoveZIndex={setRemoveZIndex}
+                />
+              )}
+            </>
           )}
         </OuterContainer>
       </ContentContainer>

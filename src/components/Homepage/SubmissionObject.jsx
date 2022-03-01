@@ -161,7 +161,7 @@ function SubmissionObject({
   const router = useRouter();
 
   function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function (txt) {
+    return str?.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
@@ -183,7 +183,11 @@ function SubmissionObject({
 
   function NewlineText(props) {
     const text = props.text;
-    return text.split("\n").map((str, i) => <p key={i}>{str}</p>);
+    if (text) {
+      return text.split("\n").map((str, i) => <p key={i}>{str}</p>);
+    } else {
+      return null;
+    }
   }
 
   function viewSubmission() {
@@ -201,7 +205,7 @@ function SubmissionObject({
   return (
     <SubmissionObjectContainer
       initial={{ opacity: 0 }}
-      animate={inView && { opacity: 1, duration: { delay: 0.2 } }}
+      animate={inView && { opacity: 1 }}
       ref={observe}
     >
       {flagMessage && (

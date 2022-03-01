@@ -92,7 +92,6 @@ function IntroText() {
   async function loadTotalMessageLength() {
     const totalMessageLength = await getTotalMessageLength();
     setTotalLength(totalMessageLength.data);
-    console.log(totalLength);
   }
 
   return (

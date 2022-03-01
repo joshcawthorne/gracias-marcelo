@@ -72,7 +72,7 @@ export default class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://gracias-marcelo.lufctrust.com/og-image.jpg"
+            content="https://gracias-marcelo.lufctrust.com/og-image.jpg?v=2"
           />
 
           <meta name="title" content="Gracias, Marcelo." />
@@ -93,7 +93,7 @@ export default class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://gracias-marcelo.lufctrust.com/og-image.jpg"
+            content="https://gracias-marcelo.lufctrust.com/og-image.jpg?v=2"
           />
 
           <meta property="twitter:card" content="summary_large_image" />
@@ -108,7 +108,7 @@ export default class MyDocument extends Document {
           />
           <meta
             property="twitter:image"
-            content="https://gracias-marcelo.lufctrust.com/og-image.jpg"
+            content="https://gracias-marcelo.lufctrust.com/og-image.jpg?v=2"
           />
           {this.props.styleTags}
         </Head>

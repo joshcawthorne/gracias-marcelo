@@ -144,10 +144,8 @@ function Header({ removeZIndex }) {
   useEffect(() => {
     if (isHome) {
       setAnim(true);
-      console.log("yes");
     } else {
       setAnim(false);
-      console.log("no");
     }
   }, [isHome]);
 

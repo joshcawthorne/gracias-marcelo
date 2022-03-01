@@ -141,7 +141,7 @@ function Carousel() {
     if (str?.length <= n) {
       return str;
     }
-    const subString = str.substr(0, n - 1);
+    const subString = str?.substr(0, n - 1);
     return (
       (useWordBoundary
         ? subString.substr(0, subString.lastIndexOf(" "))
@@ -172,7 +172,6 @@ function Carousel() {
           freeMode={true}
           resistanceRatio={1}
           resistance
-          freeModeMomentum={true}
         >
           {carouselData.map((item, i) => (
             <SwiperSlide

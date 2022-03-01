@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { NextSeo } from "next-seo";
 
 import getRandomMessage from "src/services/getRandomMessage";
 import Loader from "src/components/Loader";
@@ -29,6 +30,7 @@ function Index() {
 
   return (
     <LoaderContainer>
+      <NextSeo title={`Gracias, Marcelo `} />
       <Loader />
     </LoaderContainer>
   );

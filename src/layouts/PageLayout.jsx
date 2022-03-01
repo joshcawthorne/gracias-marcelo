@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Script from "next/script";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
+import Head from "next/head";
 
 const PageContainer = styled.div`
   width: 100%;
@@ -20,6 +21,9 @@ const ContentContainer = styled.div`
 function PageLayout({ children, setRemoveZIndex, removeZIndex }) {
   return (
     <PageContainer>
+      <Head>
+        <title>Gracias, Marcelo</title>
+      </Head>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-HGVBEPRWDB"
         strategy="afterInteractive"
