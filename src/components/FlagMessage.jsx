@@ -32,7 +32,7 @@ const FlagMessageContainer = styled(motion.div)`
   width: 600px;
   max-width: 100%;
   position: relative;
-
+  min-height: 100vh;
   overflow-y: auto;
   margin-top: 0px;
   max-height: 100vh;
