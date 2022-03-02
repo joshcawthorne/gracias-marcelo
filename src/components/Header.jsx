@@ -42,7 +42,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   padding: 0px 40px;
   box-sizing: border-box;
-  ${mq.mobile(css`
+  ${mq.tablet(css`
     padding: 0 15px;
   `)}
 `;

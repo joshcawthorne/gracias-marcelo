@@ -14,6 +14,8 @@ const OuterContainer = styled.div`
   ${mq.mobile(css`
     margin-top: 75px;
   `)};
+  overflow-x: hidden;
+  max-width: 100vw;
 `;
 
 function Index({ setRemoveZIndex }) {

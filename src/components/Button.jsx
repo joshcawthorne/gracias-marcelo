@@ -56,7 +56,7 @@ const ButtonItem = styled.button`
     transition: 400ms;
   }
 
-  ${mq.mobile(css`
+  ${mq.tablet(css`
     margin-bottom: 10px;
     font-size: 12px;
     line-height: 12px;
