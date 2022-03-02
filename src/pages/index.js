@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { NextSeo } from "next-seo";
 import animateScrollTo from "animated-scroll-to";
 import { useRouter } from "next/router";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
 import IntroText from "src/components/Homepage/IntroText";
 import Carousel from "src/components/Homepage/Carousel";
@@ -20,6 +21,13 @@ const OuterContainer = styled.div`
 
 function Index({ setRemoveZIndex }) {
   const router = useRouter();
+
+  useEffect(() => {
+    disablePageScroll();
+    setTimeout(() => {
+      enablePageScroll();
+    }, 3600);
+  }, []);
 
   return (
     <OuterContainer>

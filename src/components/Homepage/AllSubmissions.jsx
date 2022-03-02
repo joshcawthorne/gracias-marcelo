@@ -237,7 +237,9 @@ function AllSubmissions({ setRemoveZIndex }) {
   useEffect(() => {}, [ascending]);
 
   return (
-    <Container styles={{ display: "flex", justifyContent: "center" }}>
+    <Container
+      styles={{ display: "flex", justifyContent: "center", overflow: "hidden" }}
+    >
       <ContentContainer
         variants={ContainerAnim}
         initial="hidden"

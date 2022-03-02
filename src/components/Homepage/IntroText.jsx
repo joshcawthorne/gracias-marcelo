@@ -95,7 +95,7 @@ function IntroText() {
   }
 
   return (
-    <Container>
+    <Container style={{ overflow: "hidden" }}>
       <IntroTextContainer>
         <Title>
           <motion.span
