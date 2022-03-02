@@ -261,7 +261,7 @@ const DomainInput = styled.input`
   background-color: #24222d;
   border-style: solid;
   border-width: 0px;
-  color: #54647d;
+  color: #fff;
   outline: none;
   ::-moz-selection {
     background: #e5de0b;
@@ -277,7 +277,10 @@ const DomainInput = styled.input`
 const DomainCopyButton = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #2d3547;
+  background-color: #130c1f;
+  border-color: #24222d;
+  border-width: 2px;
+  border-style: solid;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   display: flex;
