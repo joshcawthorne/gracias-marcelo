@@ -72,6 +72,7 @@ function AllSubmissionListAsc({ setRemoveZIndex }) {
       next={fetchMoreData}
       hasMore={messageData.length >= totalMessageLength ? false : true}
       loader={<LoaderObject />}
+      scrollThreshold={0.2}
       endMessage={
         <p
           style={{
@@ -86,7 +87,6 @@ function AllSubmissionListAsc({ setRemoveZIndex }) {
     >
       <InnerContainer>
         {messageData.map((d, i) => {
-          console.log(d);
           if (!d.flagged) {
             return (
               <SubmissionObject
