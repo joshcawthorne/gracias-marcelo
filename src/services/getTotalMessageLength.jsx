@@ -4,8 +4,8 @@ async function getTotalMessageLength() {
   try {
     const { data, count } = await supabase
       .from("messages")
-      .select("*", { count: "exact" })
-      .eq("flagged", false);
+      .select("*", { count: "exact" });
+
     if (count) {
       return { error: false, errorMessage: null, data: count };
     } else {

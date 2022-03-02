@@ -152,6 +152,7 @@ function SubmissionObject({
   messageContent,
   flagged,
   setRemoveZIndex,
+  ascending,
 }) {
   const [display, setDisplay] = useState(false);
   const [open, setOpen] = useState(false);
@@ -229,7 +230,7 @@ function SubmissionObject({
       <InnerContainer>
         <UpperLayer onClick={() => setOpen(!open)}>
           <LeftContent>
-            <NumberItem>{id - 43}</NumberItem>
+            <NumberItem>{ascending ? id - 43 : id}</NumberItem>
             <Submitter>{submitterNamePretty}</Submitter>
           </LeftContent>
           <RightContent>

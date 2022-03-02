@@ -96,6 +96,7 @@ function AllSubmissionListDesc({ setRemoveZIndex }) {
                 messageContent={d.message_content}
                 flagged={d.flagged}
                 setRemoveZIndex={setRemoveZIndex}
+                ascending={false}
               />
             );
           } else {
