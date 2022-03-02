@@ -219,7 +219,7 @@ function AllSubmissions({ setRemoveZIndex }) {
   const [endPosition, setEndPosition] = useState(false);
   const [totalLength, setTotalLength] = useState(6000);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [ascending, setAscending] = useState(true);
+  const [ascending, setAscending] = useState(false);
   const [loadedTotalLength, setLoadedTotalLength] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState("");
