@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
@@ -10,6 +10,7 @@ import mq from "src/utils/mq";
 
 import Logo from "src/assets/svg/lustLogo.svg";
 import ErrorIcon from "src/assets/svg/error.svg";
+import { useRouter } from "next/router";
 
 const FlagMessageOuterContainer = styled.div`
   height: 100vh;
@@ -41,6 +42,7 @@ const FlagMessageContainer = styled(motion.div)`
   max-height: 100vh;
   ${mq.mobile(css`
     min-height: 100vh;
+    border-radius: 0px;
   `)};
 `;
 
@@ -213,6 +215,17 @@ function FlagMessage({ quote, id, setFlagMessage }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [hasFlagged, setHasFlagged] = useState(false);
+  const router = useRouter();
+  const [isHome, setIsHome] = useState(false);
+
+  useEffect(() => {
+    if (router.pathname === "/") {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+  }, [router]);
 
   function backAction() {
     setFlagMessage(false);
@@ -232,7 +245,18 @@ function FlagMessage({ quote, id, setFlagMessage }) {
     }, 2000);
   }
 
-  function handleComplete() {}
+  function handleComplete() {
+    setHasFlagged(true);
+  }
+
+  function closeWithFlagged() {
+    setFlagMessage(false);
+    if (!isHome) {
+      router.push("/random");
+    } else {
+      location.reload();
+    }
+  }
 
   return (
     <FlagMessageOuterContainer>
@@ -260,54 +284,95 @@ function FlagMessage({ quote, id, setFlagMessage }) {
           <LogoContainer>
             <Logo width={"45px"} fill={"#fff"} />
           </LogoContainer>
-          <BackButton action={backAction} text={"Cancel"} />
+          <BackButton
+            action={hasFlagged ? closeWithFlagged : backAction}
+            text={hasFlagged ? "Close" : "Cancel"}
+          />
         </UpperLayer>
-        <TitleContainer
-          initial="hidden"
-          animate={runAnimation ? "show" : "hidden"}
-          variants={UpperLayerAnim}
-        >
-          <Title>Flag this message as inappropriate?</Title>
-          <Desc>
-            <p>
-              {
-                "While we're working to filter out any inappropriate content, we're just a team of volunteers, and we've had thousands of messages submitted."
-              }
-            </p>
-            <p>
-              {
-                "If you feel this specific message is inappropriate, please let us know by clicking the button below. We'll review the message and remove it if it's inappropriate."
-              }
-            </p>
-          </Desc>
-        </TitleContainer>
-        <MessageContainer
-          initial="hidden"
-          animate={runAnimation ? "show" : "hidden"}
-          variants={ContentLayerAnim}
-        >
-          <NewlineText text={quote} />
-        </MessageContainer>
+        {hasFlagged ? (
+          <>
+            <TitleContainer
+              initial="hidden"
+              animate={runAnimation ? "show" : "hidden"}
+              variants={UpperLayerAnim}
+            >
+              <Title>Thank you for Flagging this message.</Title>
+              <Desc>
+                <p>
+                  {"One of our team members will review this message soon."}
+                </p>
+                <p>
+                  {
+                    "If this message was targeted harassment, or something extreme such as racism, please feel free to contact us about it by emailing info@leedsunitedtrust.com, so we can act more quickly."
+                  }
+                </p>
+              </Desc>
+            </TitleContainer>
 
-        <ButtonContainer
-          initial="hidden"
-          animate={runAnimation ? "show" : "hidden"}
-          variants={ButtonAnim}
-        >
-          <Button
-            text={"Cancel"}
-            action={backAction}
-            loading={false}
-            disabled={false}
-          />
-          <Button
-            text={"Flag Inappropriate"}
-            action={handleFlag}
-            loading={loading}
-            disabled={loading}
-            styles={{ marginRight: "0" }}
-          />
-        </ButtonContainer>
+            <ButtonContainer
+              initial="hidden"
+              animate={runAnimation ? "show" : "hidden"}
+              variants={ButtonAnim}
+            >
+              <Button
+                text={"Close"}
+                action={closeWithFlagged}
+                loading={false}
+                disabled={false}
+                styles={{ marginRight: "0" }}
+              />
+            </ButtonContainer>
+          </>
+        ) : (
+          <>
+            <TitleContainer
+              initial="hidden"
+              animate={runAnimation ? "show" : "hidden"}
+              variants={UpperLayerAnim}
+            >
+              <Title>Flag this message as inappropriate?</Title>
+              <Desc>
+                <p>
+                  {
+                    "While we're working to filter out any inappropriate content, we're just a team of volunteers, and we've had thousands of messages submitted."
+                  }
+                </p>
+                <p>
+                  {
+                    "If you feel this specific message is inappropriate, please let us know by clicking the button below. We'll review the message and remove it if it's inappropriate."
+                  }
+                </p>
+              </Desc>
+            </TitleContainer>
+            <MessageContainer
+              initial="hidden"
+              animate={runAnimation ? "show" : "hidden"}
+              variants={ContentLayerAnim}
+            >
+              <NewlineText text={quote} />
+            </MessageContainer>
+
+            <ButtonContainer
+              initial="hidden"
+              animate={runAnimation ? "show" : "hidden"}
+              variants={ButtonAnim}
+            >
+              <Button
+                text={"Cancel"}
+                action={backAction}
+                loading={false}
+                disabled={false}
+              />
+              <Button
+                text={"Flag Inappropriate"}
+                action={handleFlag}
+                loading={loading}
+                disabled={loading}
+                styles={{ marginRight: "0" }}
+              />
+            </ButtonContainer>
+          </>
+        )}
       </FlagMessageContainer>
     </FlagMessageOuterContainer>
   );

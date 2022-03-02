@@ -54,6 +54,7 @@ const FlagMessageContainer = styled(motion.div)`
   max-height: 100vh;
   ${mq.mobile(css`
     min-height: 100vh;
+    border-radius: 0px;
   `)};
 `;
 

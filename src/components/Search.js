@@ -62,16 +62,22 @@ function Search({ searchTerm, setRemoveZIndex }) {
             </NoResultsContainer>
           ) : (
             <SearchResultsContainer>
-              {results.map((result, i) => (
-                <SubmissionObject
-                  key={i}
-                  id={result.id}
-                  submitter={result.submitter}
-                  messageContent={result.message_content}
-                  flagged={result.flagged}
-                  setRemoveZIndex={setRemoveZIndex}
-                />
-              ))}
+              {results.map((result, i) => {
+                if (!result.flagged) {
+                  return (
+                    <SubmissionObject
+                      key={i}
+                      id={result.id}
+                      submitter={result.submitter}
+                      messageContent={result.message_content}
+                      flagged={result.flagged}
+                      setRemoveZIndex={setRemoveZIndex}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </SearchResultsContainer>
           )}
         </>

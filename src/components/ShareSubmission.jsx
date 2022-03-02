@@ -43,6 +43,7 @@ const FlagMessageContainer = styled(motion.div)`
   ${mq.mobile(css`
     height: 100vh;
     width: 100vw;
+    border-radius: 0;
   `)};
 `;
 

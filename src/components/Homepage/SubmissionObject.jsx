@@ -59,6 +59,9 @@ const Submitter = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-transform: capitalize;
+  ${mq.mobile(css`
+    font-size: 14px;
+  `)};
 `;
 
 const ChevronContainer = styled(motion.div)`

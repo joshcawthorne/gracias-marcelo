@@ -41,7 +41,7 @@ function PageLayout({ children, setRemoveZIndex, removeZIndex }) {
       <ContentContainer setRemoveZIndex={setRemoveZIndex}>
         {children}
       </ContentContainer>
-      <Footer />
+      <Footer removeZIndex={removeZIndex} />
     </PageContainer>
   );
 }

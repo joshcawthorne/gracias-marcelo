@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import SwiperCore, { Autoplay, Navigation, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import mq from "src/utils/mq";
+import { useRouter } from "next/router";
 import {
   useWindowSize,
   useWindowWidth,
@@ -114,6 +115,7 @@ function Carousel() {
   const [carouselData, setCarouselData] = useState([]);
   const [loading, setLoading] = useState(true);
   const width = useWindowWidth();
+  const router = useRouter();
 
   useEffect(() => {
     getData();
@@ -177,10 +179,11 @@ function Carousel() {
             <SwiperSlide
               key={i}
               style={{
-                height: width > 767 ? "300px" : "160px",
+                height: width > 767 ? "300px" : "180px",
                 maxWidth: "600px",
                 overflowY: "visible",
               }}
+              onClick={() => router.push("/s/" + item.id)}
             >
               <AnimLayer key={i} variants={ItemAnim}>
                 <CarouselObject key={i}>

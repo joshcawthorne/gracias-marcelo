@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 import getAllMessages from "src/services/getAllMessages";
@@ -25,16 +24,9 @@ const LoaderContainer = styled.div`
   margin-bottom: 100px;
 `;
 
-function AllSubmissionListAsc({ ascending, setRemoveZIndex }) {
-  const [loadPosition, setLoadPosition] = useState("-1");
+function AllSubmissionListAsc({ setRemoveZIndex }) {
   const [messageData, setMessageData] = useState([]);
-  const [endPosition, setEndPosition] = useState(false);
-  const [totalLength, setTotalLength] = useState(6000);
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [loadedTotalLength, setLoadedTotalLength] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
-  const [reset, setReset] = useState(false);
+  const [totalMessageLength, setTotalMessageLength] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,31 +35,24 @@ function AllSubmissionListAsc({ ascending, setRemoveZIndex }) {
   }, []);
 
   async function loadTotalMessageLength() {
-    const totalMessageLength = await getTotalMessageLength();
-
-    setTotalLength(totalMessageLength.data);
-    setLoadedTotalLength(true);
-    loadMoreMessages();
+    const totalLegnthData = await getTotalMessageLength();
+    setTotalMessageLength(totalLegnthData.data);
   }
 
-  async function loadMoreMessages(reset) {
+  const fetchMoreData = async () => {
     const { data, endPosition, error, errorMessage } = await getAllMessages({
-      startPosition: reset ? 0 : parseInt(loadPosition) + 1,
+      startPosition: messageData.length,
       ascending: true,
     });
     if (error) {
       console.log(errorMessage);
     }
     if (data) {
-      setLoadPosition(parseInt(endPosition));
-      if (endPosition >= totalLength) {
-        setEndPosition(true);
-      }
       setTimeout(() => {
-        setMessageData((messageData) => [...messageData, ...data]);
+        setMessageData([...messageData, ...data]);
       }, Math.floor(Math.random() * (2000 - 0 + 1)) - 1);
     }
-  }
+  };
 
   function handleClick(id) {
     router.push(`/message/${id}`);
@@ -80,11 +65,12 @@ function AllSubmissionListAsc({ ascending, setRemoveZIndex }) {
       </LoaderContainer>
     );
   };
+
   return (
     <StyledInfiniteScroll
       dataLength={messageData.length}
-      next={loadMoreMessages}
-      hasMore={!endPosition}
+      next={fetchMoreData}
+      hasMore={messageData.length >= totalMessageLength ? false : true}
       loader={<LoaderObject />}
       endMessage={
         <p
@@ -97,10 +83,10 @@ function AllSubmissionListAsc({ ascending, setRemoveZIndex }) {
           <b>{"You've reached the end of the road"}</b>
         </p>
       }
-      // below props only if you need pull down functionality
     >
       <InnerContainer>
         {messageData.map((d, i) => {
+          console.log(d);
           if (!d.flagged) {
             return (
               <SubmissionObject

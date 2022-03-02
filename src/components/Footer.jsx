@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import mq from "src/utils/mq";
+import { useRouter } from "next/router";
 
 const FooterContainerOuter = styled.div`
   height: 70px;
@@ -14,7 +15,11 @@ const FooterContainerOuter = styled.div`
   background-color: #130c1f78;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 10;
+  ${(props) =>
+    !props.removeZindex &&
+    css`
+      z-index: 10;
+    `}
   ${mq.mobile(css`
     display: none;
   `)};
@@ -32,8 +37,9 @@ const FooterContainer = styled.div`
 `;
 
 const FooterContainerInner = styled.div`
-  display: block;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Created = styled.div`
@@ -59,24 +65,60 @@ const CopyrightText = styled.div`
   line-height: 14px;
 `;
 
-function Footer() {
+const TopLayer = styled.div``;
+
+const BottomLayer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Divider = styled.div`
+  height: 10px;
+  width: 1px;
+  background-color: #fff;
+  opacity: 0.6;
+  display: inline-block;
+  margin: 0 5px;
+`;
+
+const PolicyContainer = styled.div`
+  color: #b8b6bc;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  color: #baa000;
+`;
+
+function Footer({ removeZindex }) {
+  const router = useRouter();
   return (
-    <FooterContainerOuter>
+    <FooterContainerOuter removeZindex={removeZindex}>
       <FooterContainer>
         <FooterContainerInner>
-          <CopyrightText>
-            © 2022 - Present, Leeds United Supporters' Trust
-          </CopyrightText>
-          <Created>
-            <span> | </span> Designed and Built by{" "}
-            <a
-              href="https://www.joshcawthorne.com"
-              target={"_blank"}
-              rel="noreferrer"
-            >
-              Josh Cawthorne
-            </a>
-          </Created>
+          <TopLayer>
+            <CopyrightText>
+              © 2022 - Present, Leeds United Supporters' Trust
+            </CopyrightText>
+            <Divider />
+            <PolicyContainer onClick={() => router.push("/privacy-policy")}>
+              Privacy Policy
+            </PolicyContainer>
+          </TopLayer>
+          <BottomLayer>
+            <Created>
+              Designed and Built by{" "}
+              <a
+                href="https://www.joshcawthorne.com"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                Josh Cawthorne
+              </a>
+            </Created>
+          </BottomLayer>
         </FooterContainerInner>
       </FooterContainer>
     </FooterContainerOuter>

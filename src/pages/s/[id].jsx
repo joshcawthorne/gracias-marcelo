@@ -70,7 +70,7 @@ const QuoteMessage = styled(motion.div)`
     content: "”";
     position: fixed;
     bottom: -250px;
-    right: 100px;
+    right: 300px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -82,10 +82,14 @@ const QuoteMessage = styled(motion.div)`
   p {
     margin-bottom: 15px;
   }
+  @media (max-width: 1500px) {
+    :after {
+      right: 150px;
+    }
+  }
   @media (max-width: 1400px) {
     :after {
-      bottom: -400px;
-      right: 0px;
+      right: 50px;
     }
   }
   @media (max-width: 1250px) {
