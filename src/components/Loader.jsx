@@ -50,6 +50,7 @@ function Loader() {
     "Very good Davies",
     "Learning how to pronounce Ipswich",
     "Preparing powerpoints on Frank Lampard",
+    "Polishing the FIFA fair play award",
   ];
 
   return (
