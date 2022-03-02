@@ -595,7 +595,6 @@ function FlagMessage({ quote, setSubmitMessage, submitMessage }) {
                         error={nameError}
                         type={"name"}
                         autoComplete={"name"}
-                        autoFocus={true}
                       />
                     </InputItem>
                     <InputItem>

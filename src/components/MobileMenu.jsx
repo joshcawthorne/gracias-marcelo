@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import Div100vh from "react-div-100vh";
 
 import Logo from "src/assets/svg/lustLogo.svg";
 import Cross from "src/assets/svg/cross.svg";
 
 const MobileMenuOuterContainer = styled(motion.div)`
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   z-index: 200;
   position: fixed;
@@ -198,67 +199,73 @@ function MobileMenu({ setMenuOpen, setSubmitMessage, menuOpen }) {
   };
 
   return (
-    <MobileMenuOuterContainer
-      initial="hidden"
-      animate={runAnim ? "show" : "hidden"}
-      variants={BackgroundAnim}
-    >
-      <TopLayer
+    <Div100vh>
+      <MobileMenuOuterContainer
         initial="hidden"
         animate={runAnim ? "show" : "hidden"}
-        variants={TopLayerAnim}
+        variants={BackgroundAnim}
       >
-        <LogoContainer onClick={() => handleViewAll()}>
-          <Logo width={"50px"} />
-        </LogoContainer>
-        <CloseIconContainer onClick={() => handleClose()}>
-          <Cross width={"30px"} />
-        </CloseIconContainer>
-      </TopLayer>
-      <ContentContainer
-        initial="hidden"
-        animate={runAnim ? "show" : "hidden"}
-        variants={ContentAnim}
-      >
-        <Title key={0} variants={ItemAnim}>
-          <span>Gracias, </span>Marcelo
-        </Title>
-        <MenuItem
-          onClick={() => handleViewRandom()}
-          key={1}
-          variants={ItemAnim}
+        <TopLayer
+          initial="hidden"
+          animate={runAnim ? "show" : "hidden"}
+          variants={TopLayerAnim}
         >
-          View a random Message
-        </MenuItem>
-        <MenuItem onClick={() => handleSubmit()} key={2} variants={ItemAnim}>
-          Submit your message
-        </MenuItem>
-        <MenuItem onClick={() => handleJoinTrust()} key={3} variants={ItemAnim}>
-          Join The Trust
-        </MenuItem>
-      </ContentContainer>
-      <BottomLayer
-        initial="hidden"
-        animate={runAnim ? "show" : "hidden"}
-        variants={BottomAnim}
-      >
-        <FooterContainerInner>
-          <CopyrightText>
-            © 2022 - Present, Leeds United Supporters' Trust
-          </CopyrightText>
-          <Created>
-            <span> | </span> Designed and Built by{" "}
-            <a
-              href="https://www.joshcawthorne.com"
-              target={"_blank"}
-              rel="noreferrer"
-            >
-              Josh Cawthorne
-            </a>
-          </Created>
-        </FooterContainerInner>
-      </BottomLayer>
-    </MobileMenuOuterContainer>
+          <LogoContainer onClick={() => handleViewAll()}>
+            <Logo width={"50px"} />
+          </LogoContainer>
+          <CloseIconContainer onClick={() => handleClose()}>
+            <Cross width={"30px"} />
+          </CloseIconContainer>
+        </TopLayer>
+        <ContentContainer
+          initial="hidden"
+          animate={runAnim ? "show" : "hidden"}
+          variants={ContentAnim}
+        >
+          <Title key={0} variants={ItemAnim}>
+            <span>Gracias, </span>Marcelo
+          </Title>
+          <MenuItem
+            onClick={() => handleViewRandom()}
+            key={1}
+            variants={ItemAnim}
+          >
+            View a random Message
+          </MenuItem>
+          <MenuItem onClick={() => handleSubmit()} key={2} variants={ItemAnim}>
+            Submit your message
+          </MenuItem>
+          <MenuItem
+            onClick={() => handleJoinTrust()}
+            key={3}
+            variants={ItemAnim}
+          >
+            Join The Trust
+          </MenuItem>
+        </ContentContainer>
+        <BottomLayer
+          initial="hidden"
+          animate={runAnim ? "show" : "hidden"}
+          variants={BottomAnim}
+        >
+          <FooterContainerInner>
+            <CopyrightText>
+              © 2022 - Present, Leeds United Supporters' Trust
+            </CopyrightText>
+            <Created>
+              <span> | </span> Designed and Built by{" "}
+              <a
+                href="https://www.joshcawthorne.com"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                Josh Cawthorne
+              </a>
+            </Created>
+          </FooterContainerInner>
+        </BottomLayer>
+      </MobileMenuOuterContainer>
+    </Div100vh>
   );
 }
 
