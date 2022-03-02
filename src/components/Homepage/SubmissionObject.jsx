@@ -230,7 +230,7 @@ function SubmissionObject({
       <InnerContainer>
         <UpperLayer onClick={() => setOpen(!open)}>
           <LeftContent>
-            <NumberItem>{ascending ? id - 43 : id}</NumberItem>
+            <NumberItem>{!ascending ? id - 43 : id}</NumberItem>
             <Submitter>{submitterNamePretty}</Submitter>
           </LeftContent>
           <RightContent>
