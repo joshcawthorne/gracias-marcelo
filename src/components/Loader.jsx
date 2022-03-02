@@ -44,7 +44,6 @@ function Loader() {
     "Straightening out my glasses (Thanks, Bamford)",
     "Giving away a literal car in the Christmas Raffle",
     "Something something Frank Lampard",
-    "Something something Frank Lampard",
     "Mi traductor se retrasa",
     "Making players pick litter",
     "Bueno.",
