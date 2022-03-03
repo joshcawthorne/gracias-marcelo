@@ -72,7 +72,7 @@ function AllSubmissionListDesc({ setRemoveZIndex, setTotalLengthObj }) {
       next={fetchMoreData}
       hasMore={messageData.length >= totalMessageLength ? false : true}
       loader={<LoaderObject />}
-      scrollThreshold={0.2}
+      scrollThreshold={0}
       endMessage={
         <p
           style={{

@@ -21,11 +21,13 @@ const OuterContainer = styled.div`
 
 function Index({ setRemoveZIndex }) {
   const router = useRouter();
-  const [totalLengthObj, setTotalLengthObj] = useState(10000);
+  const [totalLengthObj, setTotalLengthObj] = useState("");
+  const [hasRun, setHasRun] = useState(false);
 
   useEffect(() => {
     disablePageScroll();
     setTimeout(() => {
+      setHasRun(true);
       enablePageScroll();
     }, 3600);
   }, []);
@@ -34,7 +36,11 @@ function Index({ setRemoveZIndex }) {
     <OuterContainer>
       <NextSeo title={`Gracias, Marcelo `} />
 
-      <IntroText totalLengthObj={totalLengthObj} />
+      <IntroText
+        totalLengthObj={totalLengthObj}
+        key={totalLengthObj}
+        hasRun={hasRun}
+      />
 
       <Carousel />
 

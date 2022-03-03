@@ -83,7 +83,7 @@ const DescriptionAnim = {
   },
 };
 
-function IntroText({ totalLengthObj }) {
+function IntroText({ totalLengthObj, hasRun }) {
   const [totalLength, setTotalLength] = useState(totalLengthObj);
 
   async function loadTotalMessageLength() {
@@ -96,7 +96,7 @@ function IntroText({ totalLengthObj }) {
       <IntroTextContainer>
         <Title>
           <motion.span
-            initial="hidden"
+            initial={hasRun ? "show" : "hidden"}
             animate={"show"}
             variants={TitleAnimOne}
             style={{ color: "#fde115" }}
@@ -104,7 +104,7 @@ function IntroText({ totalLengthObj }) {
             Gracias,
           </motion.span>{" "}
           <motion.span
-            initial="hidden"
+            initial={hasRun ? "show" : "hidden"}
             animate={"show"}
             variants={TitleAnimTwo}
           >
@@ -112,7 +112,7 @@ function IntroText({ totalLengthObj }) {
           </motion.span>
         </Title>
         <Description
-          initial="hidden"
+          initial={hasRun ? "show" : "hidden"}
           animate={"show"}
           variants={DescriptionAnim}
         >
