@@ -38,12 +38,12 @@ const LeftContent = styled.div`
 
 const NumberItem = styled.div`
   background-color: #292335;
-  width: 39px;
-  height: 39px;
+  width: 42px;
+  height: 42px;
   min-width: 29px;
   min-height: 29px;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 10.5px;
   line-height: 11px;
   text-align: center;
   border-radius: 5px;
@@ -110,7 +110,7 @@ const Message = styled.div`
   color: #fff;
   position: relative;
   padding-left: 35px;
-  margin-left: 18px;
+  margin-left: 20px;
   padding-right: 30px;
   padding-top: 10px;
   padding-bottom: 0px;
@@ -204,6 +204,10 @@ function SubmissionObject({
 
   function handleShareClick() {
     setShareSubmission(true);
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   return (
