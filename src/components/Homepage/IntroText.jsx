@@ -99,7 +99,7 @@ function IntroText() {
       <IntroTextContainer>
         <Title>
           <motion.span
-            initial={hasRun ? "show" : "hidden"}
+            initial={"hidden"}
             animate={"show"}
             variants={TitleAnimOne}
             style={{ color: "#fde115" }}
@@ -107,7 +107,7 @@ function IntroText() {
             Gracias,
           </motion.span>{" "}
           <motion.span
-            initial={hasRun ? "show" : "hidden"}
+            initial={"hidden"}
             animate={"show"}
             variants={TitleAnimTwo}
           >
@@ -115,7 +115,7 @@ function IntroText() {
           </motion.span>
         </Title>
         <Description
-          initial={hasRun ? "show" : "hidden"}
+          initial={"hidden"}
           animate={"show"}
           variants={DescriptionAnim}
         >
