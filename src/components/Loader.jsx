@@ -47,7 +47,7 @@ function Loader() {
     "Mi traductor se retrasa",
     "Making players pick litter",
     "Bueno.",
-    "Very good Davies",
+    "Very good Davis",
     "Learning how to pronounce Ipswich",
     "Preparing powerpoints on Frank Lampard",
     "Polishing the FIFA fair play award",

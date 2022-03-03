@@ -11,7 +11,7 @@ async function getRandomMessages() {
       const shuffled = data.sort(() => 0.5 - Math.random());
       let selected = shuffled.slice(0, 30);
       return {
-        error: true,
+        error: false,
         errorMessage: null,
         data: selected,
       };
