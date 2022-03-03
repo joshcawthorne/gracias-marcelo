@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
+import Plyr from "plyr-react";
 
 import Button from "src/components/Button";
 import FlagMessage from "src/components/FlagMessage";
@@ -161,6 +162,62 @@ const ButtonContainer = styled(motion.div)`
   flex-wrap: wrap;
 `;
 
+const VideoPlayerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  .plyr {
+    width: 100%;
+  }
+`;
+
+const TooltipContainer = styled.div`
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  background-color: #0a0514;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  margin-bottom: 30px;
+  margin-left: 20px;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #fde115;
+  }
+  ${mq.mobile(css`
+    max-width: 90%;
+  `)};
+`;
+
+const TooltipTitle = styled.div`
+  font-weight: 700;
+  line-height: 24px;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 6px;
+  z-index: 5;
+`;
+
+const TooltipText = styled.div`
+  line-height: 18px;
+  font-size: 14px;
+  color: #fff;
+
+  z-index: 5;
+`;
+
 const ContributorAnimtion = {
   hidden: { opacity: 0, y: 0 },
   show: {
@@ -248,10 +305,11 @@ function MessageView({ setRemoveZIndex }) {
     console.warn(errorMessage);
     if (error) {
       if (errorMessage === "flagged") {
+        /*
         setError(true);
         setErrorMessage(
           "Sorry, this message has been flagged as inappropriate. Please contact us if you think this is a mistake."
-        );
+        );*/
         setLoading(false);
       } else {
         router.push("/");
@@ -298,6 +356,23 @@ function MessageView({ setRemoveZIndex }) {
     router.push("/");
   }
 
+  const Tooltip = ({ title, text }) => (
+    <TooltipContainer>
+      <TooltipTitle>{title}</TooltipTitle>
+      <TooltipText>{text}</TooltipText>
+    </TooltipContainer>
+  );
+
+  const videoSrc = {
+    type: "video",
+    sources: [
+      {
+        src: messageData.message_content,
+        provider: "youtube",
+      },
+    ],
+  };
+
   return (
     <Container>
       <Head>
@@ -324,62 +399,97 @@ function MessageView({ setRemoveZIndex }) {
             submitter={submitterNamePretty}
           />
         )}
-        <QuoteContainer>
-          <MessageAttirbution>
-            <motion.p
-              style={{ display: "inline-block", marginRight: "5px" }}
+        {console.log(messageData)}
+        {messageData.isVideo ? (
+          <QuoteContainer>
+            <Tooltip
+              title={"What is this?"}
+              text={
+                "This is a special video post, built just for Riley. Unfortunately, we cannot accept other video submissions"
+              }
+            />
+            <MessageAttirbution>
+              <motion.p
+                style={{ display: "inline-block", marginRight: "5px" }}
+                initial="hidden"
+                animate={"show"}
+                variants={ContributorAnimtion}
+              >
+                Message <span>#{messageData.id - 43}</span>
+              </motion.p>
+
+              <motion.p
+                style={{ marginTop: "10px" }}
+                initial="hidden"
+                animate={"show"}
+                variants={ContributorAnimtionSecond}
+              >
+                Contributed by <span>{submitterNamePretty}</span>
+              </motion.p>
+            </MessageAttirbution>
+
+            <VideoPlayerContainer>
+              <Plyr source={videoSrc} options={{}} style={{ width: "100%" }} />
+            </VideoPlayerContainer>
+          </QuoteContainer>
+        ) : (
+          <QuoteContainer>
+            <MessageAttirbution>
+              <motion.p
+                style={{ display: "inline-block", marginRight: "5px" }}
+                initial="hidden"
+                animate={"show"}
+                variants={ContributorAnimtion}
+              >
+                Message <span>#{messageData.id - 43}</span>
+              </motion.p>
+
+              <motion.p
+                style={{ marginTop: "10px" }}
+                initial="hidden"
+                animate={"show"}
+                variants={ContributorAnimtionSecond}
+              >
+                Contributed by <span>{submitterNamePretty}</span>
+              </motion.p>
+            </MessageAttirbution>
+            <QuoteMessage variants={TextAnim} initial="hidden" animate={"show"}>
+              <NewlineText text={messageData.message_content} />
+            </QuoteMessage>
+
+            <ButtonContainer
+              variants={ButtonAnim}
               initial="hidden"
               animate={"show"}
-              variants={ContributorAnimtion}
             >
-              Message <span>#{messageData.id - 43}</span>
-            </motion.p>
-
-            <motion.p
-              style={{ marginTop: "10px" }}
-              initial="hidden"
-              animate={"show"}
-              variants={ContributorAnimtionSecond}
-            >
-              Contributed by <span>{submitterNamePretty}</span>
-            </motion.p>
-          </MessageAttirbution>
-          <QuoteMessage variants={TextAnim} initial="hidden" animate={"show"}>
-            <NewlineText text={messageData.message_content} />
-          </QuoteMessage>
-
-          <ButtonContainer
-            variants={ButtonAnim}
-            initial="hidden"
-            animate={"show"}
-          >
-            <Button
-              text={"View Another"}
-              Icon={RandomIcon}
-              action={handleViewAnother}
-              useIcon
-            />
-            <Button
-              text={"View All"}
-              Icon={ViewAll}
-              useIcon
-              action={handleViewAll}
-            />
-            <Button
-              text={"Share Submission"}
-              Icon={Share}
-              useIcon
-              action={handleShareClick}
-            />
-            <Button
-              text={"Flag as inappropriate"}
-              Icon={Warning}
-              useIcon
-              warning
-              action={handleFlagClick}
-            />
-          </ButtonContainer>
-        </QuoteContainer>
+              <Button
+                text={"View Another"}
+                Icon={RandomIcon}
+                action={handleViewAnother}
+                useIcon
+              />
+              <Button
+                text={"View All"}
+                Icon={ViewAll}
+                useIcon
+                action={handleViewAll}
+              />
+              <Button
+                text={"Share Submission"}
+                Icon={Share}
+                useIcon
+                action={handleShareClick}
+              />
+              <Button
+                text={"Flag as inappropriate"}
+                Icon={Warning}
+                useIcon
+                warning
+                action={handleFlagClick}
+              />
+            </ButtonContainer>
+          </QuoteContainer>
+        )}
       </QuoteContainerOuter>
     </Container>
   );

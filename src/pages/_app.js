@@ -5,6 +5,7 @@ import PageLayout from "src/layouts/PageLayout";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
+import "plyr-react/dist/plyr.css";
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
