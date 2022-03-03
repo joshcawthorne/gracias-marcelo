@@ -405,7 +405,7 @@ function MessageView({ setRemoveZIndex }) {
             <Tooltip
               title={"What is this?"}
               text={
-                "This is a special video post, built just for Riley. Unfortunately, we cannot accept other video submissions"
+                "This is a special video post, built just for Riley. Unfortunately, we cannot accept other video submissions."
               }
             />
             <MessageAttirbution>
