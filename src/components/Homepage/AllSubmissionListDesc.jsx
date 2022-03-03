@@ -97,6 +97,7 @@ function AllSubmissionListDesc({ setRemoveZIndex }) {
                 flagged={d.flagged}
                 setRemoveZIndex={setRemoveZIndex}
                 ascending={false}
+                isVideo={d.isVideo}
               />
             );
           } else {

@@ -96,6 +96,7 @@ function AllSubmissionListAsc({ setRemoveZIndex }) {
                 messageContent={d.message_content}
                 flagged={d.flagged}
                 setRemoveZIndex={setRemoveZIndex}
+                isVideo={d.isVideo}
               />
             );
           } else {

@@ -72,6 +72,7 @@ function Search({ searchTerm, setRemoveZIndex }) {
                       messageContent={result.message_content}
                       flagged={result.flagged}
                       setRemoveZIndex={setRemoveZIndex}
+                      isVideo={result.isVideo}
                     />
                   );
                 } else {
