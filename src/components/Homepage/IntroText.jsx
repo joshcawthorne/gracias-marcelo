@@ -129,7 +129,7 @@ function IntroText() {
             Marcelo has spoken so often about how football belongs to the
             supporters above anyone else, so it seems only right that he should
             know just how important he is to us. Below you’ll see{" "}
-            <span>{totalLength + 150}</span> messages to Marcelo that we will be
+            <span>{totalLength + 217}</span> messages to Marcelo that we will be
             making sure he receives.{" "}
           </p>
           <p>
