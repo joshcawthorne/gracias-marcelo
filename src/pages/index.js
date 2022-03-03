@@ -25,7 +25,6 @@ function Index({ setRemoveZIndex }) {
   useEffect(() => {
     disablePageScroll();
     setTimeout(() => {
-      setHasRun(true);
       enablePageScroll();
     }, 3600);
   }, []);
