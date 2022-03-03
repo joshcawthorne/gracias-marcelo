@@ -24,7 +24,7 @@ const LoaderContainer = styled.div`
   margin-bottom: 100px;
 `;
 
-function AllSubmissionListDesc({ setRemoveZIndex }) {
+function AllSubmissionListDesc({ setRemoveZIndex, setTotalLengthObj }) {
   const [messageData, setMessageData] = useState([]);
   const [totalMessageLength, setTotalMessageLength] = useState(0);
   const router = useRouter();
@@ -91,12 +91,14 @@ function AllSubmissionListDesc({ setRemoveZIndex }) {
             return (
               <SubmissionObject
                 key={i}
+                first={i === 0}
                 id={d.id}
                 submitter={d.submitter}
                 messageContent={d.message_content}
                 flagged={d.flagged}
                 setRemoveZIndex={setRemoveZIndex}
                 ascending={false}
+                setTotalLengthObj={setTotalLengthObj}
               />
             );
           } else {

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { NextSeo } from "next-seo";
 import animateScrollTo from "animated-scroll-to";
@@ -21,6 +21,7 @@ const OuterContainer = styled.div`
 
 function Index({ setRemoveZIndex }) {
   const router = useRouter();
+  const [totalLengthObj, setTotalLengthObj] = useState(10000);
 
   useEffect(() => {
     disablePageScroll();
@@ -32,10 +33,15 @@ function Index({ setRemoveZIndex }) {
   return (
     <OuterContainer>
       <NextSeo title={`Gracias, Marcelo `} />
-      <IntroText />
+
+      <IntroText totalLengthObj={totalLengthObj} />
+
       <Carousel />
 
-      <AllSubmissions setRemoveZIndex={setRemoveZIndex} />
+      <AllSubmissions
+        setRemoveZIndex={setRemoveZIndex}
+        setTotalLengthObj={setTotalLengthObj}
+      />
     </OuterContainer>
   );
 }

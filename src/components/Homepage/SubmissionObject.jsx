@@ -153,6 +153,8 @@ function SubmissionObject({
   flagged,
   setRemoveZIndex,
   ascending,
+  first,
+  setTotalLengthObj,
 }) {
   const [display, setDisplay] = useState(false);
   const [open, setOpen] = useState(false);
@@ -205,6 +207,12 @@ function SubmissionObject({
   function handleShareClick() {
     setShareSubmission(true);
   }
+
+  useEffect(() => {
+    if (first) {
+      setTotalLengthObj(id - 43);
+    }
+  }, []);
 
   return (
     <SubmissionObjectContainer

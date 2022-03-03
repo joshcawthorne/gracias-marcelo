@@ -83,11 +83,8 @@ const DescriptionAnim = {
   },
 };
 
-function IntroText() {
-  const [totalLength, setTotalLength] = useState(6123);
-  useEffect(() => {
-    loadTotalMessageLength();
-  }, []);
+function IntroText({ totalLengthObj }) {
+  const [totalLength, setTotalLength] = useState(totalLengthObj);
 
   async function loadTotalMessageLength() {
     const totalMessageLength = await getTotalMessageLength();
@@ -129,7 +126,7 @@ function IntroText() {
             Marcelo has spoken so often about how football belongs to the
             supporters above anyone else, so it seems only right that he should
             know just how important he is to us. Below you’ll see{" "}
-            <span>{totalLength + 217}</span> messages to Marcelo that we will be
+            <span>{totalLength}</span> messages to Marcelo that we will be
             making sure he receives.{" "}
           </p>
           <p>
