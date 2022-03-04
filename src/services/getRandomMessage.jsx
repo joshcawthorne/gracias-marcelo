@@ -4,7 +4,7 @@ async function getRandomMessage() {
   try {
     const { data, count } = await supabase
       .from("messages")
-      .select("message_content, submitter, isVideo, flagged, id", {
+      .select("message_content, submitter, is_video, flagged, id", {
         count: "exact",
       })
       .eq("flagged", false);

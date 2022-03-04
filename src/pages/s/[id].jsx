@@ -401,7 +401,7 @@ function MessageView({ setRemoveZIndex }) {
           />
         )}
         {console.log(messageData)}
-        {messageData.isVideo ? (
+        {messageData.is_video ? (
           <QuoteContainer>
             <Tooltip
               title={"What is this?"}

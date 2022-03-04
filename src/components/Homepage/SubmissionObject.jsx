@@ -153,7 +153,7 @@ function SubmissionObject({
   flagged,
   setRemoveZIndex,
   ascending,
-  isVideo,
+  is_video,
 }) {
   const [display, setDisplay] = useState(false);
   const [open, setOpen] = useState(false);
@@ -251,7 +251,7 @@ function SubmissionObject({
         >
           <MessageContentContainerInner>
             <Message>
-              {isVideo ? (
+              {is_video ? (
                 "Click 'View Full Submission' to view this video."
               ) : (
                 <NewlineText text={messageContent} />
