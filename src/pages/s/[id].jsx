@@ -334,11 +334,13 @@ function MessageView({ setRemoveZIndex }) {
 
   if (error) {
     return (
-      <QuoteContainerOuter>
-        <QuoteContainer>
-          <QuoteMessage>{errorMessage}</QuoteMessage>
-        </QuoteContainer>
-      </QuoteContainerOuter>
+      <Container>
+        <QuoteContainerOuter>
+          <QuoteContainer>
+            <QuoteMessage>{errorMessage}</QuoteMessage>
+          </QuoteContainer>
+        </QuoteContainerOuter>
+      </Container>
     );
   }
 
