@@ -305,11 +305,10 @@ function MessageView({ setRemoveZIndex }) {
     console.warn(errorMessage);
     if (error) {
       if (errorMessage === "flagged") {
-        /*
         setError(true);
         setErrorMessage(
           "Sorry, this message has been flagged as inappropriate. Please contact us if you think this is a mistake."
-        );*/
+        );
         setLoading(false);
       } else {
         router.push("/");
