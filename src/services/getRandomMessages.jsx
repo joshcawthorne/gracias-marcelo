@@ -2,7 +2,9 @@ import { supabase } from "src/utils/supabaseClient";
 
 async function getRandomMessages() {
   try {
-    const { data, error } = await supabase.from("messages").select();
+    const { data, error } = await supabase
+      .from("messages")
+      .select("message_content", "submitter", "isVideo", "flagged", "id");
 
     if (error) {
       return { error: true, errorMessage: error.message, data: null };

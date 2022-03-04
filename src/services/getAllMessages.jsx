@@ -5,7 +5,7 @@ async function getAllMessages({ startPosition, ascending }) {
   try {
     const { data } = await supabase
       .from("messages")
-      .select("*")
+      .select("message_content, submitter, isVideo, flagged, id")
       .range(startPosition, endPosition)
       .order("id", { ascending: ascending });
     if (data) {

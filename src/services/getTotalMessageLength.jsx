@@ -4,7 +4,9 @@ async function getTotalMessageLength() {
   try {
     const { data, count } = await supabase
       .from("messages")
-      .select("*", { count: "exact" });
+      .select("message_content, submitter, isVideo, flagged, id", {
+        count: "exact",
+      });
 
     if (count) {
       return { error: false, errorMessage: null, data: count };

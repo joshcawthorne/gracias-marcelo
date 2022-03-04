@@ -4,7 +4,7 @@ async function getSearchResults(searchTerm) {
   try {
     const { data, error } = await supabase
       .from("messages")
-      .select()
+      .select("message_content, submitter, isVideo, flagged, id")
       .textSearch("submitter", searchTerm);
 
     if (error) {
