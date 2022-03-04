@@ -232,9 +232,7 @@ function MobileMenu({ setMenuOpen, setSubmitMessage, menuOpen }) {
           >
             View a random Message
           </MenuItem>
-          <MenuItem onClick={() => handleSubmit()} key={2} variants={ItemAnim}>
-            Submit your message
-          </MenuItem>
+
           <MenuItem
             onClick={() => handleJoinTrust()}
             key={3}

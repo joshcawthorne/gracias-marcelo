@@ -1,13 +1,12 @@
 import { supabase } from "src/utils/supabaseClient";
 
-async function flagMessage({ id }) {
+async function flagMessage({ message_id }) {
   try {
     const updates = {
-      id: id,
-      flagged: true,
+      message_id: message_id,
     };
-
-    let { error } = await supabase.from("messages").upsert(updates, {
+    console.log(updates);
+    let { error } = await supabase.from("flagged").upsert(updates, {
       returning: "minimal",
     });
 

@@ -196,18 +196,6 @@ function Header({ removeZIndex }) {
                   Icon={RandomIcon}
                 />
               </motion.div>
-              <motion.div
-                initial={isHome ? "hidden" : "visible"}
-                animate={anim ? "show" : isHome ? "hidden" : "visible"}
-                variants={ButtonTwoAnim}
-              >
-                <Button
-                  text={"Submit your message"}
-                  useIcon
-                  Icon={Plus}
-                  action={handleSubmit}
-                />
-              </motion.div>
             </ButtonContainer>
             <motion.div
               initial={isHome ? "hidden" : "visible"}
