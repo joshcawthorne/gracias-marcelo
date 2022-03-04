@@ -233,7 +233,7 @@ function FlagMessage({ quote, id, setFlagMessage }) {
 
   async function handleFlag() {
     setLoading(true);
-    const { error, errorMessage, data } = await flagMessage({ id: id });
+    const { error, errorMessage } = await flagMessage({ id: id });
     setTimeout(() => {
       if (error) {
         setError(true);

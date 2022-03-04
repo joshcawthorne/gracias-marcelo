@@ -7,14 +7,14 @@ async function flagMessage({ id }) {
       flagged: true,
     };
 
-    let { data, error } = await supabase.from("messages").upsert(updates);
+    let { error } = await supabase.from("messages").upsert(updates, {
+      returning: "minimal",
+    });
 
     if (error) {
       return { error: true, errorMessage: error.message, data: null };
-    }
-
-    if (data) {
-      return { error: false, errorMessage: null, data: data };
+    } else {
+      return { error: false, errorMessage: null, data: null };
     }
   } catch (error) {
     alert(error.message);
