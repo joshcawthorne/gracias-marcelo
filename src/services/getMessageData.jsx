@@ -14,8 +14,8 @@ async function getRandomMessage({ id }) {
         if (data[0].flagged === false) {
           return { error: false, errorMessage: null, data: data };
         } else {
-          //return { error: true, errorMessage: "flagged", data: null };
-          return { error: false, errorMessage: null, data: data };
+          return { error: true, errorMessage: "flagged", data: null };
+          //return { error: false, errorMessage: null, data: data };
         }
       } else {
         return {
