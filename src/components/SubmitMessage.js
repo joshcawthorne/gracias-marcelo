@@ -415,7 +415,6 @@ function FlagMessage({ quote, setSubmitMessage, submitMessage }) {
       const user = supabase.auth.user();
 
       const messageData = {
-        email: emailInput,
         submitter: nameInput,
         message_content: messageInput,
       };
